@@ -11,10 +11,8 @@ export class ProductsService {
 
     getProducts(): Observable<ProductsResponse> {
         return this.http.get<ProductsResponse>(
-            'http://localhost:3000/products'
+            'http://localhost:3000/api/products'
         ).pipe(
-            tap(resp => console.log)
-        )
+            tap((resp)=> console.log(resp)));
     }
-
 }
