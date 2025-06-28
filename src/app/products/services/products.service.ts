@@ -33,7 +33,7 @@ export class ProductsService {
             })
             .pipe(
                 tap((resp) => {
-                    // console.log(resp)
+                    console.log(resp)
                 })
             );
     }
