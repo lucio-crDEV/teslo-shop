@@ -1,8 +1,8 @@
 import { Component, inject } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
 
 import { ProductCardComponent } from '@/products/components/product-card/product-card.component';
 import { ProductsService } from '@/products/services/products.service';
-import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home-page',
@@ -12,13 +12,14 @@ import { rxResource } from '@angular/core/rxjs-interop';
 export class HomePageComponent { 
   
   productsService = inject(ProductsService);
-
   productsResource = rxResource({
     request: () => ({}),
-    loader: ({ request })=> { 
-      return this.productsService.getProducts()
+    loader: ({ request }) => { 
+      return this.productsService.getProducts({
+        limit: 5,
+        gender: 'women'
+      })
     },
   })
-
 
  }

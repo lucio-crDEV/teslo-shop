@@ -6,4 +6,3 @@ export interface User {
     isActive: boolean;
     roles:    string[];
 }
-
