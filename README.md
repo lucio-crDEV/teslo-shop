@@ -1,30 +1,29 @@
 # TesloShop
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.4.
+Este proyecto usa: 
+- Angular CLI - version  @20.0.4
+- Node: @22.17.0
+- Package Manager: npm @11.4.2
+- CSS: tailwindcss @4.1.11
+- Tailwind theme: daisyui @5.0.43
+- swiper@11.2.10
 
 ## Development server
 
-To start a local development server, run:
+Una vez clonado el repositorio, instalar la dependecias:
 
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Monta un servidor desarrollo en el puerto localhost:4200:
 
 ```bash
-ng generate component component-name
+ng serve -o
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
+Una vez que el servidor esté en funcionamiento, abre tu navegador y navega a `http://localhost:4200/`. 
+* La aplicación se recargará automáticamente cada vez que modifiques alguno de los archivos fuente.
 
 ## Building
 
