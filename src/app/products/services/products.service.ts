@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { count, Observable, of, tap } from 'rxjs';
+import { count, delay, Observable, of, tap } from 'rxjs';
 
 import { Product, ProductsResponse } from '@products/interfaces/product.interface';
 import { environment } from 'src/environments/environment';
@@ -19,9 +19,15 @@ export class ProductsService {
     private http = inject(HttpClient);
 
     // El cache de products almacena un Map que se genera con el tipado ProductsResponse
-    // Se genera una variable privada que alamacena un Map() compuestos por un par definido en el tipado string, ProductsResponse
+    // Se genera una variable privada que alamacena un Map() compuestos por un par definido en el tipado string, ProductsResponse 
+    
+    // plural
     private productsCache = new Map<string, ProductsResponse>()
+    
+    // singular
+    private productCache = new Map<string, Product>()
 
+    // fx que retorna productos en general, filtra por cantidad, paginacion, por genero y gestiona el cache
     getProducts(options: Options): Observable<ProductsResponse> {
 
         // Valores por defecto para las querys 
@@ -46,14 +52,24 @@ export class ProductsService {
                 }
             })
             .pipe(
-                tap((resp) => console.log(resp)),
+                // tap((resp) => console.log(resp)),
                 // se almacena la response de la consulta en caché, para la implementación anterior que evita consultas masivas en el backend
-                tap((resp) => this.productsCache.set(key, resp)),
+                tap( products => this.productsCache.set(key, products)),
             );
     }
 
     getProductByIdSlug(idSlug: string): Observable<Product> {
 
-        return this.http.get<Product>(`${baseUrl}/products/${idSlug}`);
+        if( this.productCache.has(idSlug)){
+            return of(this.productCache.get(idSlug)!)
+        }
+        
+        
+        return this.http.get<Product>(`${baseUrl}/products/${idSlug}`)
+            .pipe(
+                // el delay solo en la consulta a la api permite ver el loader la primera vez que se carga, luego ya al cargarse desde el cache carga automaticamente
+                delay(200),
+                tap( product => this.productCache.set(idSlug, product))
+            )
     }
 }
