@@ -48,4 +48,13 @@ export class LoginPageComponent {
     });
   }
 
+  // TODO: Check Authentication
+
+  // Registro
+
+  // Logout
+
+
+  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImM2MGNmY2E0LTkxN2UtNGY1ZC1hYzA0LTRkZWU5OGE0YzkyYSIsImlhdCI6MTc1MzczMTc4OCwiZXhwIjoxNzUzNzM4OTg4fQ.6l0M4jBqh_DBht8F206rZR2Ov_3BCfVdH5lxf1kakyw
+
 }
