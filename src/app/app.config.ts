@@ -7,7 +7,9 @@ import {
 } from '@angular/common/http';
 
 import { routes } from './app.routes';
+
 import { loggingInterceptor } from './shared/interceptors/logging.interceptor';
+import { authInterceptor } from './auth/interceptors/auth.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -15,6 +17,11 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     //inyectando cliente http
     //utilizando fetch a diferencia de XMLHttpRequest (default)
-    provideHttpClient(withFetch(), withInterceptors([loggingInterceptor])),
+    provideHttpClient(
+      withFetch(),
+      withInterceptors([
+        // loggingInterceptor, 
+        authInterceptor])
+    ),
   ],
 };
