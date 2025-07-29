@@ -19,15 +19,9 @@ export class RegisterPageComponent {
   authService = inject(AuthService);
 
   registerForm = this.fb.group({
-    fullName: ['',
-      [Validators.required]
-    ],
-    email: ['',
-      [Validators.required, Validators.email]
-    ],
-    password: ['',
-      [Validators.required, Validators.minLength(6)]
-    ]
+    fullName: ['', [Validators.required]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
 
@@ -43,8 +37,8 @@ export class RegisterPageComponent {
     const { fullName = '', email = '', password = '' } = this.registerForm.value;
 
     this.authService.register(fullName!, email!, password!).subscribe(
-      (isAuthenticated)=>{
-        if (isAuthenticated){
+      (isAuthenticated) => {
+        if (isAuthenticated) {
           this.router.navigateByUrl('/');
           return;
         };
