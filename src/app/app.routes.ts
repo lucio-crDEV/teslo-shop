@@ -1,13 +1,16 @@
 import { Routes } from '@angular/router';
+import { notAuthenticatedGuard } from './auth/guards/not-authenticated.guard';
 
 export const routes: Routes = [
 
     {
         path: 'auth',
-        loadChildren: () => import('./auth/auth.routes')
+        loadChildren: () => import('./auth/auth.routes'),
+        canMatch: [
+            notAuthenticatedGuard, 
+        ]
         
     },
-    // orden importante, path vacío debiese ser el último para que pase en primer luegar las rutas específicamente definidas
     {
         path: '',
         loadChildren: () => import('./store-front/store-front.routes'),
