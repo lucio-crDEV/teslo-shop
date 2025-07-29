@@ -1,15 +1,20 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient, withFetch } from '@angular/common/http';
+import {
+  provideHttpClient,
+  withFetch,
+  withInterceptors,
+} from '@angular/common/http';
 
 import { routes } from './app.routes';
+import { loggingInterceptor } from './shared/interceptors/logging.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
+    provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     //inyectando cliente http
     //utilizando fetch a diferencia de XMLHttpRequest (default)
-    provideHttpClient(withFetch()),
-  ]
+    provideHttpClient(withFetch(), withInterceptors([loggingInterceptor])),
+  ],
 };
