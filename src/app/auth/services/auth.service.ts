@@ -42,6 +42,16 @@ export class AuthService {
             catchError((error: any) => this.handleAuthError(error))
         )
     };
+    register(fullName: string, email: string, password: string): Observable<boolean> {
+        return this.http.post<AuthResponse>(`${baseUrl}/auth/register`, {
+            fullName: fullName, 
+            email: email, 
+            password: password,
+        }).pipe(
+            map((resp) => this.handleAuthSuccess(resp)),
+            catchError((error) => this.handleAuthError(error))
+        )
+    }
 
     checkStatus(): Observable<boolean> {
         const token = localStorage.getItem('token');
